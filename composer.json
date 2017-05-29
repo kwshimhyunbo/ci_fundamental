@@ -1,0 +1,7 @@
+{
+	"require": {
+        "twig/twig": "~1.0",
+        "kenjis/codeigniter-ss-twig": "dev-master",
+        "twig/extensions": "^1.4"
+	}
+}
