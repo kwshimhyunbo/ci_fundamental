@@ -1,6 +1,7 @@
 // webpack.config.js
 var path = require('path')
 var webpack = require('webpack')
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
@@ -10,32 +11,21 @@ module.exports = {
         filename: 'bundle.js'
     },
     module: {
-        rules: [
-            {
-                test: /\.css$/,
-                use: [
-                    'style-loader',
-                    'css-loader'
-                ]
-            },
-            {
-                test: /\.js$/,
-                exclude: /node_modules/,
-                loader: 'babel-loader',
-                options: {
-                    presets: [[
-                        'env', {
-                            targets: {
-                                browsers: ['last 2 versions']
-                            }
-                        }
-                    ]]
-                }
-            }
-        ]
+        rules: [{
+            // 전 시간 babel-loader
+        }, {
+            test: /\.css$/,
+            use: ExtractTextPlugin.extract({
+                fallback: 'style-loader',
+                use: 'css-loader'
+            }),
+        }],
     },
     plugins: [
-        new UglifyJSPlugin()
+        new UglifyJSPlugin(),
+        new ExtractTextPlugin({
+            filename: 'app.css',
+        })
     ]
 
 };

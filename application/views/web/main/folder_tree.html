@@ -1,0 +1,97 @@
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/default2.css">
+</head>
+<body>
+<!--
+  Checkbox Trickery with CSS:
+  http://codersblock.com/blog/checkbox-trickery-with-css/
+-->
+<form action="text.php" id="myForm" method="post">
+    <span>/홈마스터</span><span id="modify"></span>
+    <div class="tree">
+        <div>
+            <input id="n-1" type="checkbox">
+            <label for="n-1">iPhone</label>
+            <div class="sub">
+                <div>
+                    <input id="n-1-0" type="checkbox">
+                    <label for="n-1-0">Dev</label>
+                    <div class="sub">
+                        <a href="#/tag/www" id="/add/var">Boros Swiftblade</a>
+                    </div>
+                </div>
+                <div>
+                    <input id="n-1-1" type="checkbox">
+                    <label for="n-1-1">Stage</label>
+                    <div class="sub">
+                        <a href="#/tag/www" id="/add/var">Boros Swiftblade</a>
+                    </div>
+                </div>
+                <div>
+                    <input id="n-1-2" type="checkbox">
+                    <label for="n-1-2">Test</label>
+                    <div class="sub">
+                        <a href="#/tag/www" id="/add/var">Boros Swiftblade</a>
+                        <a href="#link">Lightning Helix</a>
+                        <a href="#link">Lightning Helix</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <input id="n-2" type="checkbox">
+            <label for="n-2">Android</label>
+            <div class="sub">
+                <div>
+                    <input id="n-2-0" type="checkbox">
+                    <label for="n-2-0">Dev</label>
+                    <div class="sub">
+                        <a href="#/tag/www" id="/add/var">Boros Swiftblade</a>
+                    </div>
+                </div>
+                <div>
+                    <input id="n-2-1" type="checkbox">
+                    <label for="n-2-1">Stage</label>
+                    <div class="sub">
+                        <a href="#/tag/www" id="/add/var">Boros Swiftblade</a>
+                        <a href="#link">Lightning Helix</a>
+                    </div>
+                </div>
+                <div>
+                    <input id="n-2-2" type="checkbox">
+                    <label for="n-2-2">Test</label>
+                    <div class="sub">
+                        <a href="#/tag/www" id="/add/var">Boros Swiftblade</a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <input type="button" id="downloadBtn" value="Download">
+    <input type="hidden" name="selectedValue" id="selectedValue" value="">
+</form>
+
+<script>
+    $(document).ready(function(){
+        var selectedValue = $("#selectedValue")
+        var modifyBtn = $("#modify");
+        $("a").on('click', function (e) {
+            selectedValue.val(e.target.id);
+            modifyBtn.text(e.target.id);
+        });
+        $("#downloadBtn").on("click", function (e) {
+           $("#myForm").submit();
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,136 @@
+{% extends 'base.twig' %}
+{% block link %}
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/dist/app2.css">
+{% endblock link %}
+
+{% block content %}
+    <form action="/project/download/apps" id="myForm" method="post">
+        <span>/홈마스터{{ app }}</span><span id="modify"></span>
+        <div class="tree">
+
+            {% if apps.iphone is not null %}
+            <div>
+                <input id="n-1" type="checkbox">
+                <label for="n-1">iPhone</label>
+                <div class="sub">
+                    {% for app in apps.iphone %}
+
+                        {% if app.dev is not null %}
+                            {% for info in app.dev %}
+                                <div>
+                                    <input id="n-1-{{ info.seq }}" type="checkbox">
+                                    <label for="n-1-{{ info.seq }}">DEV</label>
+                                    <div class="sub">
+                                        <a href="#{{ info.seq}}" id="/iPhone/{{ info.title }}">{{ info.title }}</a>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+
+                        {% if app.store is not null %}
+                            {% for info in app.store %}
+                                <div>
+                                    <input id="n-1-{{ info.seq }}" type="checkbox">
+                                    <label for="n-1-{{ info.seq }}">STORE</label>
+                                    <div class="sub">
+                                        <a href="#{{ info.seq}}" id="/iPhone/{{ info.title }}">{{ info.title }}</a>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+
+                        {% if app.test is not null %}
+                            {% for info in app.test %}
+                                <div>
+                                    <input id="n-1-{{ info.seq }}" type="checkbox">
+                                    <label for="n-1-{{ info.seq }}">Test</label>
+                                    <div class="sub">
+                                        <a href="#{{ info.seq}}" id="/iPhone/{{ info.title }}">{{ info.title }}</a>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+
+            {% if apps.android is not null %}
+                <div>
+                    <input id="n-2" type="checkbox">
+                    <label for="n-2">android</label>
+                    <div class="sub">
+                        {% for app in apps.android %}
+
+                            {% if app.dev is not null %}
+                                {% for info in app.dev %}
+                                    <div>
+                                        <input id="n-2-{{ info.seq }}" type="checkbox">
+                                        <label for="n-2-{{ info.seq }}">DEV</label>
+                                        <div class="sub">
+                                            <a href="#{{ info.seq}}" id="/Android/{{ info.title }}">{{ info.title }}</a>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+
+                            {% if app.store is not null %}
+                                {% for info in app.store %}
+                                    <div>
+                                        <input id="n-2-{{ info.seq }}" type="checkbox">
+                                        <label for="n-2-{{ info.seq }}">STORE</label>
+                                        <div class="sub">
+                                            <a href="#{{ info.seq}}" id="/Android/{{ info.title }}">{{ info.title }}</a>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+
+                            {% if app.test is not null %}
+                                {% for info in app.test %}
+                                    <div>
+                                        <input id="n-2-{{ info.seq }}" type="checkbox">
+                                        <label for="n-2-{{ info.seq }}">Test</label>
+                                        <div class="sub">
+                                            <a href="#{{ info.seq}}" id="/Android/{{ info.title }}">{{ info.title }}</a>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+
+
+
+        </div>
+        <input type="button" id="downloadBtn" value="Download">
+        <input type="hidden" name="selectedValue" id="selectedValue" value="">
+        <input type="hidden" name="selectedKey" id="selectedKey" value="">
+    </form>
+{% endblock content %}
+
+{% block script %}
+    <script>
+        $(document).ready(function(){
+            var selectedValue = $("#selectedValue")
+            var selectedKey = $("#selectedKey")
+            var modifyBtn = $("#modify");
+            $("a").on('click', function (e) {
+                console.log(e);
+                selectedValue.val(e.target.id);
+                selectedKey.val(e.target.href);
+                modifyBtn.text(e.target.id);
+
+            });
+            $("#downloadBtn").on("click", function (e) {
+                if (selectedValue[0].value !==''){
+                    $("#myForm").submit();
+                }
+            });
+        });
+    </script>
+{% endblock script %}

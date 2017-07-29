@@ -19,6 +19,10 @@
       </profile-state>
     </entry>
   </component>
+  <component name="ProjectPlainTextFileTypeManager">
+    <file url="file://$PROJECT_DIR$/src/css/libraries/AdminLTE-master/AdminLTE.css" />
+    <file url="file://$PROJECT_DIR$/src/css/libraries/AdminLTE-master/AdminLTE.min.css" />
+  </component>
   <component name="masterDetails">
     <states>
       <state key="ScopeChooserConfigurable.UI">

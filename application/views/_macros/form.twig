@@ -1,0 +1,61 @@
+{% macro attrs(attrs={}) %}
+{% for k, v in attrs %}{{ k }}{% if v %}="{{ v }}"{% endif %}{% if not loop.last %} {% endif %}{% endfor %}
+{%- endmacro -%}
+
+{% macro checkbox_inline(args={}) %}
+{% set default = {
+'position': 'left',
+'id': '',
+'name': '',
+'label': '',
+'required': false,
+'checked': false,
+'group': '',
+'all': false,
+} %}
+{% set this = default|merge(args) %}
+    <div class="checkbox-inline">
+        <div class="checkbox-container checkbox-{{ this.position }}">
+            <input class="checkbox-hidden" type="checkbox" {% if this.id %}id="{{ this.id }}"{% endif %}
+                   {% if this.name %}name="{{ this.name }}"{% endif %}
+                    {% if this.group %}data-checkbox{% if this.all %}-all{% endif %}="{{ this.group }}"{% endif %}
+                   tabindex="-1" {% if this.required %}required{% endif %} {% if this.checked %}checked{% endif %}>
+            <label {% if this.id %}for="{{ this.id }}"{% endif %} data-checkable>
+                <span class="checkbox-text">{{ this.label }}</span>
+            </label>
+        </div>
+    </div>
+{% endmacro %}
+
+{% macro radio_inline(args={}) %}
+{% set default = {
+'position': 'left',
+'id': '',
+'name': '',
+'value': '',
+'label': '',
+'required': false,
+'checked': false,
+'group': '',
+'all': false,
+} %}
+{% set this = default|merge(args) %}
+    <div class="radio-inline">
+        <div class="radio-container radio-{{ this.position }}">
+            <input class="radio-hidden" type="radio" {% if this.name %}name="{{ this.name }}"{% endif %}
+                   {% if this.id %}id="{{ this.id }}"{% endif %} {% if this.value %}value="{{ this.value }}"{% endif %}
+                   tabindex="-1" {% if this.required %}required{% endif %} {% if this.checked %}checked{% endif %}>
+            <label {% if this.id %}for="{{ this.id }}"{% endif %} data-checkable>
+                <span class="radio-text">{{ this.label }}</span>
+            </label>
+        </div>
+    </div>
+{% endmacro %}
+
+
+{% macro render_radio_btn(id_prefix, name, value, title, checked, disabled) %}
+  {%- set id = id_prefix ? id_prefix ~ '_' ~ value : value -%}
+  <input class="radio-hidden" type="radio" name="{{ name }}" value="{{ value }}" id="{{ id }}" {{ checked == value ? 'checked' }} {{ disabled ? 'disabled' }}>
+  <label class="radio-btn btn btn-default" for="{{ id }}">{{ title|raw }}</label>
+{% endmacro %}
+

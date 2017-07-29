@@ -83,3 +83,18 @@ defined('EXIT_USER_INPUT')     OR define('EXIT_USER_INPUT', 7); // invalid user 
 defined('EXIT_DATABASE')       OR define('EXIT_DATABASE', 8); // database error
 defined('EXIT__AUTO_MIN')      OR define('EXIT__AUTO_MIN', 9); // lowest automatically-assigned error code
 defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
+
+
+
+
+
+define("LOGIN_FAILED", "일치하는 정보가 없습니다.");
+define("DOES_NOT_EXISTS", "존재하지 않는 프로젝트입니다.");
+
+define("ANDROID_DEVICE", 1);
+define("IPHONE_DEVICE", 2);
+
+define("STORE_TYPE", 1);
+define("DEV_TYPE", 2);
+define("TEST_TYPE", 3);
+

@@ -1,0 +1,79 @@
+{% extends 'admin/admin_base.twig' %}
+
+{% block content %}
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                  프로젝트
+                <small>new page</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> 프로젝트</a></li>
+                <li><a href="#">관리</a></li>
+                <li class="active">리스트</li>
+            </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <div class="box-header">
+                            <h3 class="box-title">프로젝트 리스트</h3>
+                            <div class="box-tools">
+                                <div class="input-group input-group-sm" style="width: 150px;">
+                                    <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
+
+                                    <div class="input-group-btn">
+                                        <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body table-responsive no-padding">
+                            <table class="table table-hover">
+                                <tr>
+                                    <th>a</th>
+                                    <th>b</th>
+                                    <th>c</th>
+                                    <th>d</th>
+                                    <th>e</th>
+                                    <th><th>
+                                </tr>
+
+                                {% for list in project_lists %}
+                                <tr>
+                                    <td>{{ list.seq}}</td>
+                                    <th>/{{ list.folder }}</th>
+                                    <td>{{ list.name }}</td>
+                                    <td>2017-07-21</td>
+                                    <td>
+                                        {% if list.is_showing == 1 %}
+                                        <span class="label label-success">
+                                            Enabled
+                                        </span>
+                                        {% else %}
+                                        <span class="label label-danger">
+                                            Disabled
+                                        {% endif %}
+                                        </span>
+                                    </td>
+                                    <td><a href="/admin/main/lists/{{ list.seq }}"><button class="btn btn-block btn-xs btn-primary" >상세보기</button></a></td>
+                                </tr>
+                                {% endfor %}
+
+                            </table>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                </div>
+            </div>
+        </section>
+        <!-- /.content -->
+    </div>
+{% endblock content %}

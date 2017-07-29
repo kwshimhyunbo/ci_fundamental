@@ -1,0 +1,86 @@
+{% extends 'admin/admin_base.twig' %}
+{% from '/_macros/base.twig' import FORM_SELECTED_DROP_DOWN %}
+
+{% block content %}
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            <small>Preview</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="#">Forms</a></li>
+            <li class="active">General Elements</li>
+        </ol>
+    </section>
+    <section class="content">
+        <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title"></h3>
+                </div>
+                <!-- /.box-header -->
+                <!-- form start -->
+                <form role="form" action="/admin/main/add" method="post" enctype="multipart/form-data">
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label for="version">제목</label>
+                            <input type="text" class="form-control" id="title" name="title">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="project_name">프로젝트 명</label>
+                            {{  FORM_SELECTED_DROP_DOWN(GET_PROJECT_NAMING_ARRAY(), 'project_name', 'project_name')  }}
+                        </div>
+
+                        <div class="form-group">
+                            <label for="platform">플랫폼</label>
+                            {{  FORM_SELECTED_DROP_DOWN(GET_OPERATION_SYSTEM_NAMING_ARRAY(), 'platform', 'platform')  }}
+                        </div>
+
+                        <div class="form-group">
+                            <label for="version">버젼</label>
+                            <input type="text" class="form-control" id="version" name="version">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="type">타입</label>
+                            {{  FORM_SELECTED_DROP_DOWN(GET_APP_TYPE_ARRAY(), 'type', 'type')  }}
+                        </div>
+                        <div class="form-group">
+                            <label for="change">변경사항</label>
+                            <textarea class="form-control" rows="3" placeholder="Enter ..." name="changedData"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="icon">앱 아이콘</label>
+                            <input type="file" id="icon" name="icon">
+                            {#<p class="help-block">Example block-level help text here.</p>#}
+                        </div>
+
+                        <div class="form-group">
+                            <label for="app">apk, ipa</label>
+                            <input type="file" id="app" name="app">
+                            {#<p class="help-block">Example block-level help text here.</p>#}
+                        </div>
+
+                        <div class="form-group">
+                            <label for="app">plist</label>
+                            <input type="file" id="plist" name="plist">
+                            {#<p class="help-block">Example block-level help text here.</p>#}
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+
+                    <div class="box-footer">
+                        <button type="submit" class="btn btn-primary btn-block  ">제출하기</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock content %}

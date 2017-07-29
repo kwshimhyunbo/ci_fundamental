@@ -2,13 +2,13 @@
 
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-require_once('admin_base.php');
+require_once('Admin_base.php');
 
 /**
  * 랜딩 관련 클래스
  *
  */
-class Main extends Admin_base
+class Main extends AdminBase_Controller
 {
     /**
      * Constructor
@@ -17,7 +17,7 @@ class Main extends Admin_base
     function __construct()
     {
         parent::__construct();
-        $this->_init_twig();
+        $this->check_web_sign_in($this->allowMethods, $this->allowClasses);
     }
 
     /**
@@ -26,9 +26,8 @@ class Main extends Admin_base
     public function index()
     {
 
-        $this->twig->display('admin/auth/login', [
-
+        $this->twig->display('admin/main/projects',[
+            'project_lists' => ''
         ]);
-
     }
 }

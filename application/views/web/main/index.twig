@@ -1,0 +1,11 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+    <div class="social">
+        {% for project in projects %}
+            {% if project.is_showing == 1 %}
+                <a href="/project/{{ project.folder }}" class="link" target="_parent"><span>{{ project.name }}</span></a>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endblock content %}

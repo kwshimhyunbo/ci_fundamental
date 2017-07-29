@@ -2,16 +2,34 @@
 
 if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-function add_test($title = "", $data = ""){
 
+function GET_PROJECT_NAMING_ARRAY()
+{
     $CI =& get_instance();
-    $CI->load->model('test_logs');
+    $CI->load->model('projects');
+    $projects = $CI->projects->get_many();
 
-    $CI->test_logs->save([
-       "title" => $title,
-        "data" => $data
-    ]);
+    $result = [];
+    foreach ($projects as $project){
+        $result[$project->folder] = $project->name;
+    }
+    return $result;
 }
+function GET_OPERATION_SYSTEM_NAMING_ARRAY()
+{
+    $result[1]="Android";
+    $result[2]="iPhone";
+    return $result;
+}
+
+function GET_APP_TYPE_ARRAY()
+{
+    $result[1]="store";
+    $result[2]="develop";
+    $result[3]="test";
+    return $result;
+}
+
 
 function starts_with_number($str)
 {
@@ -320,6 +338,25 @@ function upload_image($field_name, $is_resize = true)
 }
 
 /**
+ * 이미지 파일 업로드
+ */
+function upload_app_icon($field_name, $is_resize = true, $upload_path)
+{
+    log_message('info', __METHOD__ . ' ' . var_export(func_get_args(), true));
+    return upload_file($field_name, 'ico|jpg|png|jpeg', $upload_path, $is_resize);
+}
+
+function upload_app($field_name, $is_resize = true, $upload_path)
+{
+    log_message('info', __METHOD__ . ' ' . var_export(func_get_args(), true));
+    return upload_file($field_name, 'ipa|apk',$upload_path, false,MAX_UPLOAD_IMAGE_WIDTH,false);
+}
+function upload_plist($field_name, $is_resize = true, $upload_path)
+{
+    log_message('info', __METHOD__ . ' ' . var_export(func_get_args(), true));
+    return upload_file($field_name, 'plist',$upload_path, false,MAX_UPLOAD_IMAGE_WIDTH,false);
+}
+/**
  * 이미지 파일 업로드 & 크롭
  */
 // function upload_image_in_addition_crop($field_name, $is_resize = true, $crop = true)
@@ -332,12 +369,19 @@ function upload_image($field_name, $is_resize = true)
 /**
  * 파일 업로드
  */
-function upload_file($field_name, $allowed_types = 'gif|jpg|png|jpeg', $is_resize = false, $image_width = MAX_UPLOAD_IMAGE_WIDTH, $convert_jpg = true)//, $image_crop = false)
+function upload_file($field_name, $allowed_types = 'gif|jpg|png|jpeg', $post_data, $is_resize = false, $image_width = MAX_UPLOAD_IMAGE_WIDTH, $convert_jpg = true )//, $image_crop = false)
 {
     log_message('info', __METHOD__ . ' ' . var_export(func_get_args(), true));
+    $project_name = $post_data['project_name'];
+    $platform = GET_OPERATION_SYSTEM_NAMING_ARRAY()[$post_data['platform']];
+    $version = $post_data['version'];
+    $type = GET_APP_TYPE_ARRAY()[$post_data['type']];
+    $name = $post_data['icon']['name'];
+    $sub_dir = $project_name."/".$platform."/". $version."/".$type."/".$name;
 
-    $sub_dir = date('Y') . '/' . date('m') . '/' . date('d') . '/' . date('H') . '/' . date('i') . '/';
+//    $sub_dir = date('Y') . '/' . date('m') . '/' . date('d') . '/' . date('H') . '/' . date('i') . '/';
     $config['upload_path'] = './uploads/' . $sub_dir;
+
     mkdir_with_sub($config['upload_path']);
 
     //$config['allowed_types'] = $allowed_types;

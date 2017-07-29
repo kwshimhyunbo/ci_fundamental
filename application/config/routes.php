@@ -56,11 +56,12 @@ $route['translate_uri_dashes'] = FALSE;
 /**
  * 웹
  */
-$route['(:any)'] = 'web/$1';
 
+$route['(:any)'] = 'web/project/install/$1';
 
 /**
  * 어드민
  */
 
 $route['admin/(:any)'] = 'admin/$1';
+$route['admin/main/lists/(:any)'] = 'admin/main/lists/$1';

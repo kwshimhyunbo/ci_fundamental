@@ -17,7 +17,7 @@ class Main extends Web_base
     function __construct()
     {
         parent::__construct();
-        $this->_init_twig();
+//        $this->load->model('projects');
     }
 
     /**
@@ -25,9 +25,6 @@ class Main extends Web_base
      */
     public function index()
     {
-
-        $this->twig->display('web/auth/login',[
-
-        ]);
+       echo 'index pages';
     }
 }
